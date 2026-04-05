@@ -73,11 +73,16 @@ router.get('/stats', async (req, res) => {
 
     // Stats por jogo
     const gameStats = await Promise.all(games.map(async g => ({
-      slug:     g.slug,
-      name:     g.name,
-      status:   g.status,
-      questions: await Question.countDocuments({ gameId: g.slug, active: true }),
-      players:   await Player.countDocuments({ [`scores.${g.slug}`]: { $exists: true } }),
+      slug:        g.slug,
+      name:        g.name,
+      icon:        g.icon,
+      color:       g.color,
+      colorDark:   g.colorDark,
+      status:      g.status,
+      description: g.description,
+      url:         g.url,
+      questions:   await Question.countDocuments({ gameId: g.slug, active: true }),
+      players:     await Player.countDocuments({ [`scores.${g.slug}`]: { $exists: true } }),
     })));
 
     res.json({
