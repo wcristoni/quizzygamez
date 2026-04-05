@@ -8,6 +8,8 @@ const gameConfigSchema = new mongoose.Schema({
   hasRanking:      { type: Boolean, default: true },
   hasOffline:      { type: Boolean, default: true },
   hasRefs:         { type: Boolean, default: false },
+  featured:        { type: Boolean, default: false },
+  apiUrl:          { type: String, default: '' },
   rankingWeights:  {
     accuracy:      { type: Number, default: 0.7 },
     volume:        { type: Number, default: 0.2 },

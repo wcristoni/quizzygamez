@@ -39,14 +39,21 @@ router.post('/games', requireAdmin, async (req, res) => {
 router.put('/games/:slug', requireAdmin, async (req, res) => {
   try {
     const { config, ...rest } = req.body;
-    // Monta update com $set para evitar sobrescrever campos não enviados
     const updateOp = { $set: rest };
-    // Merge de config — preserva campos existentes e atualiza só os enviados
     if (config) {
       Object.keys(config).forEach(k => {
         updateOp.$set[`config.${k}`] = config[k];
       });
     }
+
+    // Se marcando como featured, desmarca todos os outros primeiro
+    if (config?.featured === true) {
+      await Game.updateMany(
+        { slug: { $ne: req.params.slug } },
+        { $set: { 'config.featured': false } }
+      );
+    }
+
     const game = await Game.findOneAndUpdate(
       { slug: req.params.slug },
       updateOp,
