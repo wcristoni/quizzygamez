@@ -8,6 +8,9 @@ const { connectDB } = require('./services/database');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Railway usa proxy reverso
+app.set('trust proxy', 1);
+
 // ── Security ──────────────────────────────────────────────────────────────────
 app.use(helmet());
 
