@@ -1,2 +1,2 @@
 # quizzygamez
-QuizzyGamez — Plataforma de quiz multiplayer com múltiplos jogos
+QuizzyGamez — Plataforma de quiz multiplayer com múltiplos jogos v2
